@@ -1,0 +1,8 @@
+.input_group_container {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+}
+.input_group_field {
+  padding: 3px;
+}
