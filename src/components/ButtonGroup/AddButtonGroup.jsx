@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./AddButtonGroup.module.css";
-
+import PropTypes from "prop-types";
 const AddButtonGroup = ({ addGroupHandler }) => {
   return (
     <div>
@@ -10,5 +10,7 @@ const AddButtonGroup = ({ addGroupHandler }) => {
     </div>
   );
 };
-
+AddButtonGroup.propTypes = {
+  addGroupHandler: PropTypes.func,
+};
 export default AddButtonGroup;

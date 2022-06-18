@@ -2,17 +2,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
   color: var(--black);
   border: 1px solid var(--grey-10);
-  transition: all 300ms ease-in-out;
   width: 100%;
 }
 
 .button_group {
   display: flex;
   gap: 1.25rem;
-
   cursor: pointer;
+}
+.btn_inside_group {
+  padding-right: 8px;
+  padding: 4px;
+  padding-left: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  /* borderRadius */
+  /* paddingLeft: 8,
+            paddingRight: 8,
+            borderRadius: 10,
+            border: "none",
+            cursor: "pointer",
+            backgroundColor: "black",
+            color: "white", */
 }

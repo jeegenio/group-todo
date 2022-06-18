@@ -1,31 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Card.module.css";
-import { FaTrash, FaEdit, FaTimes } from "react-icons/fa";
-const Card = ({ name, id, onDelete }) => {
+import CheckBox from "../CheckBox/CheckBox";
+import PropTypes from "prop-types";
+
+const Card = ({
+  name,
+  id,
+  onDelete,
+  onChange,
+  onToggle,
+  checked,
+  onChecked,
+  indeterminate,
+}) => {
+  const [groupNewName, setGroupNewName] = useState(name);
+  const [edit, setEdit] = useState(false);
+
+  const handleKey = (e) => {
+    if (!groupNewName) return;
+    if (e.key === "Enter") {
+      if (onChange) {
+        onChange(id, groupNewName);
+      }
+      setEdit(false);
+    }
+  };
+
   const handleDelete = () => {
     if (onDelete) {
       onDelete(id);
     }
   };
+
+  const handleEdit = () => {
+    setEdit(true);
+  };
+  // const handleTodoToggle = (id, name) => {
+  //   onToggle(id, name);
+  // };
   return (
     <div className={styles.card}>
-      {name}
+      <CheckBox
+        checked={checked}
+        onChange={onChecked}
+        id={`${id}`}
+        indeterminate={indeterminate}
+      />
+      {edit ? (
+        <input
+          type="text"
+          value={groupNewName}
+          onChange={(e) => setGroupNewName(e.target.value)}
+          onKeyPress={handleKey}
+        />
+      ) : (
+        <div>{name}</div>
+      )}
+
       <div className={styles.button_group}>
-        <FaTimes />
-        <FaEdit />
-        <FaTrash onClick={handleDelete} />
-        <button
-          style={{
-            padding: 6,
-            borderRadius: 10,
-            border: "none",
-            cursor: "pointer",
-            backgroundColor: "black",
-            color: "white",
-          }}
-        >
-          ADD TODO
+        {edit ? (
+          <button
+            className={styles.btn_inside_group}
+            onClick={() => setEdit(false)}
+          >
+            CANCEL
+          </button>
+        ) : (
+          <button className={styles.btn_inside_group} onClick={handleEdit}>
+            EDIT
+          </button>
+        )}
+        <button className={styles.btn_inside_group} onClick={handleDelete}>
+          DELETE
         </button>
+        {/* <button className={styles.btn_inside_group} onClick={handleTodoToggle}>
+          ADD TODO
+        </button> */}
       </div>
     </div>
   );

@@ -1,0 +1,12 @@
+.input_todo_container {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+}
+.input_todo_field {
+  padding: 3px;
+}
+.select {
+  padding: 4px;
+  width: 200px;
+}
