@@ -9,6 +9,7 @@ import {
   editGroup,
   deleteTodo,
   updateTodo,
+  setCheckGroup,
 } from "../GroupSlice/GroupSlice";
 import { useAppDispatch, useAppSelector } from "../Store/store";
 import { nanoid } from "nanoid";
@@ -41,6 +42,10 @@ const FormGroup = () => {
       })
     );
     setInputGroup("");
+  };
+  const handleGroupCheck = (id, checked) => {
+    console.log(id);
+    dispatch(setCheckGroup({ id: id, checked }));
   };
   const handleDeleteGroup = (id) => {
     dispatch(deleteGroup(id));
@@ -89,6 +94,8 @@ const FormGroup = () => {
               key={i}
               name={group.name}
               id={group.id}
+              checked={group.checked}
+              onChecked={handleGroupCheck}
               onDelete={handleDeleteGroup}
               onChange={handleEditGroup}
             />

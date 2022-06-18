@@ -3,16 +3,7 @@ import styles from "./Card.module.css";
 import CheckBox from "../CheckBox/CheckBox";
 import PropTypes from "prop-types";
 
-const Card = ({
-  name,
-  id,
-  onDelete,
-  onChange,
-  onToggle,
-  checked,
-  onChecked,
-  indeterminate,
-}) => {
+const Card = ({ name, id, onDelete, onChange, checked, onChecked }) => {
   const [groupNewName, setGroupNewName] = useState(name);
   const [edit, setEdit] = useState(false);
 
@@ -40,12 +31,7 @@ const Card = ({
   // };
   return (
     <div className={styles.card}>
-      <CheckBox
-        checked={checked}
-        onChange={onChecked}
-        id={`${id}`}
-        indeterminate={indeterminate}
-      />
+      <CheckBox checked={checked} onChange={onChecked} id={`${id}`} />
       {edit ? (
         <input
           type="text"
