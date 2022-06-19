@@ -34,14 +34,16 @@ const FormGroup = () => {
   // console.log(group);
   const addGroupHandler = () => {
     if (!inputGroup) return;
+    const groupId = nanoid();
     dispatch(
       addGroup({
-        id: nanoid(),
+        id: groupId,
         name: inputGroup,
         checked: false,
         todos: [],
       })
     );
+    // setTodoId(groupId);
     setInputGroup("");
   };
   const handleGroupCheck = (id, checked) => {
@@ -56,7 +58,6 @@ const FormGroup = () => {
   };
   const addTodoHandler = () => {
     if (!inputTodo) return;
-    console.log("added");
     dispatch(
       addTodo({
         id: groupId,
@@ -98,17 +99,30 @@ const FormGroup = () => {
           <AddButtonGroup addGroupHandler={addGroupHandler} />
         </div>
         <div style={{ paddingTop: 20 }}>
-          {groups.map((group, i) => (
-            <Card
-              key={i}
-              name={group.name}
-              id={group.id}
-              checked={group.checked}
-              onChecked={handleGroupCheck}
-              onDelete={handleDeleteGroup}
-              onChange={handleEditGroup}
-            />
-          ))}
+          {groups.map((group, i) => {
+            const checkOption = group.todos.filter(
+              (todo) => todo.checked === true
+            );
+            const isIndeterminate =
+              checkOption.length !== 0 &&
+              checkOption.length !== group.todos.length;
+            console.log(isIndeterminate);
+            const checked =
+              checkOption.length !== 0 &&
+              checkOption.length === group.todos.length;
+            return (
+              <Card
+                key={group.id}
+                name={group.name}
+                id={group.id}
+                checked={checked}
+                onChecked={handleGroupCheck}
+                onDelete={handleDeleteGroup}
+                onChange={handleEditGroup}
+                indeterminate={isIndeterminate}
+              />
+            );
+          })}
         </div>
       </div>
       <div className={styles.form_second_container}>

@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
-const CheckBox = ({ id, checked, onChange }) => {
+const CheckBox = ({ id, checked, onChange, indeterminate }) => {
+  const checkRef = useRef(null);
   console.log(id);
   const handleChange = (e) => {
     if (onChange) {
       onChange(e.target.id, e.target.checked);
     }
   };
+
+  useEffect(() => {
+    if (checkRef.current) {
+      checkRef.current.indeterminate = indeterminate;
+    }
+  }, [indeterminate, checked]);
+
   return (
     <div>
       <input
@@ -14,6 +22,7 @@ const CheckBox = ({ id, checked, onChange }) => {
         id={id}
         checked={checked}
         onChange={handleChange}
+        ref={checkRef}
       />
     </div>
   );
