@@ -10,6 +10,7 @@ import {
   deleteTodo,
   updateTodo,
   setCheckGroup,
+  checkTodo,
 } from "../GroupSlice/GroupSlice";
 import { useAppDispatch, useAppSelector } from "../Store/store";
 import { nanoid } from "nanoid";
@@ -78,6 +79,14 @@ const FormGroup = () => {
     const todo = { id, name };
     dispatch(updateTodo({ id: groupId, todo }));
   };
+
+  const handleCheckedTodo = (id, checked) => {
+    const todo = {
+      id: id,
+      checked,
+    };
+    dispatch(checkTodo({ id: groupId, todo }));
+  };
   return (
     <div className={styles.form_container}>
       <div className={styles.form_second_container}>
@@ -126,6 +135,7 @@ const FormGroup = () => {
                 checked={todo.checked}
                 onDelete={todoDeleteHandler}
                 onChange={handleUpdateTodo}
+                onChecked={handleCheckedTodo}
               />
             ))}
         </div>

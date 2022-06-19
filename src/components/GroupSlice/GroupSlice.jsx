@@ -84,6 +84,19 @@ const GroupSlice = createSlice({
         }),
       ];
     },
+    checkTodo: (state, { payload }) => {
+      state.groups.map((group) => {
+        if (group.id === payload.id) {
+          group.todos.map((todo) => {
+            if (todo.id === payload.todo.id) {
+              todo.checked = payload.todo.checked;
+            }
+            return todo;
+          });
+        }
+        return group;
+      });
+    },
   },
 });
 export const {
@@ -94,5 +107,6 @@ export const {
   deleteTodo,
   updateTodo,
   setCheckGroup,
+  checkTodo,
 } = GroupSlice.actions;
 export default GroupSlice.reducer;
