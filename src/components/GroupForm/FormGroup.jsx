@@ -18,7 +18,6 @@ import Card from "../Card/Card";
 import AddTodo from "../AddTodo/AddTodo";
 import TodoList from "../TodoList/TodoList";
 import InputTodoField from "../InputTodoField/InputTodoField";
-// import FormTodo from "../FormTodo/FormTodo";
 
 const FormGroup = () => {
   const [inputGroup, setInputGroup] = useState(" ");
@@ -31,7 +30,6 @@ const FormGroup = () => {
     () => groups.find((group) => group.id === groupId),
     [groups, groupId]
   );
-  // console.log(group);
   const addGroupHandler = () => {
     if (!inputGroup) return;
     const groupId = nanoid();
@@ -43,7 +41,6 @@ const FormGroup = () => {
         todos: [],
       })
     );
-    // setTodoId(groupId);
     setInputGroup("");
   };
   const handleGroupCheck = (id, checked) => {
@@ -127,7 +124,6 @@ const FormGroup = () => {
       </div>
       <div className={styles.form_second_container}>
         <div className={styles.form_todo_container}>
-          <h1>Select Group</h1>
           <TodoList groups={groups} setTodoId={setTodoId} />
           <div style={{ display: "flex" }}>
             <InputTodoField inputTodo={inputTodo} setInputTodo={setInputTodo} />
