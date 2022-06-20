@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./AddTodo.module.css";
+import PropTypes from "prop-types";
+
 const AddTodo = ({ addTodoHandler }) => {
   return (
     <div>
@@ -9,6 +11,8 @@ const AddTodo = ({ addTodoHandler }) => {
     </div>
   );
 };
-AddTodo.propTypes = {};
+AddTodo.propTypes = {
+  addTodoHandler: PropTypes.func.isRequired,
+};
 
 export default AddTodo;

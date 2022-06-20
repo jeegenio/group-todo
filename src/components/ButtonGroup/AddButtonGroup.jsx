@@ -11,6 +11,6 @@ const AddButtonGroup = ({ addGroupHandler }) => {
   );
 };
 AddButtonGroup.propTypes = {
-  addGroupHandler: PropTypes.func,
+  addGroupHandler: PropTypes.func.isRequired,
 };
 export default AddButtonGroup;

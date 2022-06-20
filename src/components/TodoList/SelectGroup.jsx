@@ -1,7 +1,7 @@
 import React from "react";
-// import AddTodo from "../AddTodo/AddTodo";
+import PropTypes from "prop-types";
 import styles from "./InputTodo.module.css";
-const TodoList = ({ groups, setTodoId }) => {
+const SelectGroup = ({ groups, setTodoId }) => {
   const handleChange = (e) => {
     setTodoId(e.target.value);
   };
@@ -22,4 +22,8 @@ const TodoList = ({ groups, setTodoId }) => {
   );
 };
 
-export default TodoList;
+SelectGroup.propTypes = {
+  groups: PropTypes.arrayOf(PropTypes.object),
+  setTodoId: PropTypes.func.isRequired,
+};
+export default SelectGroup;

@@ -1,6 +1,4 @@
 import React, { useMemo, useState } from "react";
-import AddButtonGroup from "../ButtonGroup/AddButtonGroup";
-import InputGroupField from "../InputGroup/InputGroupField";
 import styles from "./FormGroup.module.css";
 import {
   addGroup,
@@ -14,10 +12,8 @@ import {
 } from "../GroupSlice/GroupSlice";
 import { useAppDispatch, useAppSelector } from "../Store/store";
 import { nanoid } from "nanoid";
-import Card from "../Card/Card";
-import AddTodo from "../AddTodo/AddTodo";
-import TodoList from "../TodoList/TodoList";
-import InputTodoField from "../InputTodoField/InputTodoField";
+import GroupList from "../GroupList/GroupList";
+import AddGroup from "../AddGroup/AddGroup";
 
 const FormGroup = () => {
   const [inputGroup, setInputGroup] = useState(" ");
@@ -44,7 +40,6 @@ const FormGroup = () => {
     setInputGroup("");
   };
   const handleGroupCheck = (id, checked) => {
-    console.log(id);
     dispatch(setCheckGroup({ id: id, checked }));
   };
   const handleDeleteGroup = (id) => {
@@ -87,69 +82,26 @@ const FormGroup = () => {
   };
   return (
     <div className={styles.form_container}>
-      <div className={styles.form_second_container}>
-        <div className={styles.form_input_container}>
-          <InputGroupField
-            inputGroup={inputGroup}
-            setInputGroup={setInputGroup}
-          />
-          <AddButtonGroup addGroupHandler={addGroupHandler} />
-        </div>
-        <div style={{ paddingTop: 20 }}>
-          {groups.map((group, i) => {
-            const checkOption = group.todos.filter(
-              (todo) => todo.checked === true
-            );
-            const isIndeterminate =
-              checkOption.length !== 0 &&
-              checkOption.length !== group.todos.length;
-            console.log(isIndeterminate);
-            const checked =
-              checkOption.length !== 0 &&
-              checkOption.length === group.todos.length;
-            return (
-              <Card
-                key={group.id}
-                name={group.name}
-                id={group.id}
-                checked={checked}
-                onChecked={handleGroupCheck}
-                onDelete={handleDeleteGroup}
-                onChange={handleEditGroup}
-                indeterminate={isIndeterminate}
-              />
-            );
-          })}
-        </div>
-      </div>
-      <div className={styles.form_second_container}>
-        <div className={styles.form_todo_container}>
-          <TodoList groups={groups} setTodoId={setTodoId} />
-          <div style={{ display: "flex" }}>
-            <InputTodoField inputTodo={inputTodo} setInputTodo={setInputTodo} />
-            <AddTodo addTodoHandler={addTodoHandler} />
-          </div>
-        </div>
-        <div style={{ paddingTop: 20 }}>
-          {group?.todos.length === 0 && (
-            <h4 style={{ textAlign: "center" }}>
-              No existing todo for this group
-            </h4>
-          )}
-          {group?.todos &&
-            group?.todos.map((todo) => (
-              <Card
-                key={todo.id}
-                id={todo.id}
-                name={todo.name}
-                checked={todo.checked}
-                onDelete={todoDeleteHandler}
-                onChange={handleUpdateTodo}
-                onChecked={handleCheckedTodo}
-              />
-            ))}
-        </div>
-      </div>
+      <AddGroup
+        inputGroup={inputGroup}
+        setInputGroup={setInputGroup}
+        addGroupHandler={addGroupHandler}
+        groups={groups}
+        handleGroupCheck={handleGroupCheck}
+        handleDeleteGroup={handleDeleteGroup}
+        handleEditGroup={handleEditGroup}
+      />
+      <GroupList
+        groups={groups}
+        setTodoId={setTodoId}
+        inputTodo={inputTodo}
+        setInputTodo={setInputTodo}
+        addTodoHandler={addTodoHandler}
+        group={group}
+        todoDeleteHandler={todoDeleteHandler}
+        onChange={handleUpdateTodo}
+        handleCheckedTodo={handleCheckedTodo}
+      />
     </div>
   );
 };

@@ -34,9 +34,6 @@ const Card = ({
   const handleEdit = () => {
     setEdit(true);
   };
-  // const handleTodoToggle = (id, name) => {
-  //   onToggle(id, name);
-  // };
   return (
     <div className={styles.card}>
       <CheckBox
@@ -78,6 +75,17 @@ const Card = ({
       </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  checked: PropTypes.bool.isRequired,
+  onChecked: PropTypes.func.isRequired,
+  indeterminate: PropTypes.any,
+  setChecked: PropTypes.func,
 };
 
 export default Card;
