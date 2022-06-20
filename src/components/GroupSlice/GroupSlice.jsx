@@ -30,6 +30,8 @@ const GroupSlice = createSlice({
       state.groups = [
         ...state.groups.map((group) => {
           if (group.id === payload.id) {
+            group.checked = payload.checked;
+            console.log(group.checked);
             group.todos = [
               ...group.todos.map((item) => {
                 item.checked = payload.checked;
@@ -84,6 +86,7 @@ const GroupSlice = createSlice({
       ];
     },
     checkTodo: (state, { payload }) => {
+      console.log("todocheck");
       state.groups.map((group) => {
         if (group.id === payload.id) {
           group.todos.map((todo) => {

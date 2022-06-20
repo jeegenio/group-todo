@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./AddGroup.module.css";
 import Card from "../Card/Card";
 import AddButtonGroup from "../ButtonGroup/AddButtonGroup";
@@ -13,7 +13,6 @@ const AddGroup = ({
   handleGroupCheck,
   handleDeleteGroup,
   handleEditGroup,
-  checked,
 }) => {
   return (
     <div className={styles.form_second_container}>
@@ -32,9 +31,14 @@ const AddGroup = ({
           const isIndeterminate =
             checkOption.length !== 0 &&
             checkOption.length !== group.todos.length;
-          const checked =
-            checkOption.length !== 0 &&
-            checkOption.length === group.todos.length;
+
+          let checked = false;
+
+          if (group.todos.length === 0) {
+            checked = group.checked;
+          } else if (checkOption.length === group.todos.length) {
+            checked = true;
+          }
           return (
             <Card
               key={group.id}

@@ -13,7 +13,7 @@ const CheckBox = ({ id, checked, onChange, indeterminate }) => {
     if (checkRef.current) {
       checkRef.current.indeterminate = indeterminate;
     }
-  }, [indeterminate]);
+  }, [indeterminate, checked]);
 
   return (
     <div>
@@ -29,7 +29,7 @@ const CheckBox = ({ id, checked, onChange, indeterminate }) => {
 };
 CheckBox.propTypes = {
   id: PropTypes.string.isRequired,
-  checked: PropTypes.any.isRequired,
+  checked: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   indeterminate: PropTypes.any,
 };

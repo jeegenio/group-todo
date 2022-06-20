@@ -69,9 +69,6 @@ const Card = ({
         <button className={styles.btn_inside_group} onClick={handleDelete}>
           DELETE
         </button>
-        {/* <button className={styles.btn_inside_group} onClick={handleTodoToggle}>
-          ADD TODO
-        </button> */}
       </div>
     </div>
   );
@@ -82,7 +79,7 @@ Card.propTypes = {
   id: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
   onChange: PropTypes.func,
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
   onChecked: PropTypes.func.isRequired,
   indeterminate: PropTypes.any,
   setChecked: PropTypes.func,
